@@ -1,9 +1,9 @@
 # JUDUL_PROYEK
 
 Anggota Kelompok:
-* NAMA (NPM)
-* NAMA (NPM)
-* NAMA (NPM)
+* Irfan Kamal (140810200032)
+* Amariel Danendra Dagna (140810200058)
+* Satriyatama Tristan Triharjono (140810200068)
 ---
 ## Latar Belakang
 
