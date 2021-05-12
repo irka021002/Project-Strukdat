@@ -31,11 +31,11 @@ dibebaskan sesuai kreatifitas kalian
 !-->
 Untuk rancangan antar muka dari aplikasi kami sebagai berikut :
 
-![Screen 1](Resource/screen1.png)
+![Screen 1](Resource/screen1.PNG)
 
-![Screen 2](Resource/screen2.png)
+![Screen 2](Resource/screen2.PNG)
 
-![Screen 3](Resource/screen3.png)
+![Screen 3](Resource/screen3.PNG)
 
 ## Rencana Pengerjaan Projek
 <!--
