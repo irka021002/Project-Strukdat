@@ -1,40 +1,40 @@
 namespace database {
     struct idList {
-        char* id;
+        std::string id;
         idList* next;
         idList(std::string id){
             this->id = id;
             this->next = nullptr;
         }
-    }
+    };
     struct postNode{
-        char* judul;
-        char* caption;
+        std::string judul;
+        std::string caption;
         postNode* next;
-        postNode(char* judul, char* caption){
+        postNode(std::string judul, std::string caption){
             this->judul = judul;
             this->caption = caption;
             this->next = nullptr;
         }
-    }
+    };
     struct userNode {
-        char* id;
-        char* name;
-        char* username;
-        char* password;
+        std::string id;
+        std::string name;
+        std::string username;
+        std::string password;
         idList* friends;
         idList* friendsReq;
         postNode* post;
         userNode* next;
-        userNode(char* id, char* name, char* username, char* password){
+        userNode(std::string id, std::string name, std::string username, std::string password){
             this->id = id;
             this->name = name;
             this->username = username;
             this->password = password;
-            this->friend = nullptr;
+            this->friends = nullptr;
             this->friendsReq = nullptr;
             this->post = nullptr;
             this->next = nullptr;
         }
-    }
+    };
 }
