@@ -95,3 +95,23 @@ std::string getPassword(std::string username){
         return "just a random password thats not valid";
     }
 }
+
+void addFriend(database::userNode* userToAdd, std::string usernameAdded){
+    database::idList* baru = new database::idList(usernameAdded);
+    if(userToAdd->friendsReq == nullptr){
+        userToAdd->friendsReq = baru;
+    }else{
+        baru->next = userToAdd->friendsReq;
+        userToAdd->friendsReq = baru;
+    }
+}
+
+void addPost(database::userNode* user, std::string judul, std::string caption){
+    database::postNode* baru = new database::postNode(judul, caption);
+    if(user->post == nullptr){
+        user->post = baru;
+    }else{
+        baru->next = user->post;
+        user->post = baru;
+    }
+}

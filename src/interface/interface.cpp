@@ -5,13 +5,81 @@
 #include <Windows.h>
 #include "../process/processes.cpp"
 
+void tambahTeman(database::userNode* user){
+    char yakin;
+    std::string userName;
+    int jmlhChar = user -> name.length() + 91;
+    for(int i = 1; i <= (jmlhChar-14)/2; i++){std::cout << "=";} 
+    std::cout << "|Tambah Teman|";
+    for(int i = 1; i <= (jmlhChar-14)/2; i++){std::cout << "=";}
+    std::cout << "\n";
+    std::cout << " Username : ";
+    std::getline(std::cin, userName);
+    for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+    std::cout << "\n";
+    database::userNode* userToAdd = getUser(userName);
+    std::cout << " Nama : " << userToAdd->name << "\n";
+    std::cout << " Tambah menjadi teman (Y/N) ? : ";
+    (std::cin >> yakin).get();
+    if(tolower(yakin) == 'y'){
+        addFriend(userToAdd, user->username);
+    }
+    for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+    sleep(2);
+}
+
+void buatPost(database::userNode* user){
+    int jmlhChar = user -> name.length() + 91;
+    std::string judul, caption;
+    for(int i = 1; i <= (jmlhChar-11)/2; i++){std::cout << "=";} 
+    std::cout << "|Buat Post|";
+    for(int i = 1; i <= (jmlhChar-11)/2; i++){std::cout << "=";}
+    std::cout << "\n";
+    std::cout << " Judul : ";
+    std::getline(std::cin, judul);
+    std::cout << " Caption : ";
+    std::getline(std::cin, caption);
+    addPost(user, judul, caption);
+    for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+    sleep(2);
+}
 
 void userInterface(database::userNode* user){
     bool menuCondition = true;
+    std::string name = user->name;
+    int jmlhChar = name.length() + 91;
     while(menuCondition){
         system("cls");
-        std::cout << "===================================|Selamat Datang Kembali, " << user->name << "|====================================\n";
-
+        int pilihanMenu;
+        std::cout << "===================================|Selamat Datang Kembali, " << name << "|====================================\n";
+        for(int i = 1; i <= (jmlhChar-15)/2; i++){std::cout << "=";} 
+        std::cout << "|Menu Aplikasi|";
+        for(int i = 1; i <= (jmlhChar-15)/2; i++){std::cout << "=";}
+        std::cout << "\n";
+        std::cout << " 1. Tambah teman\n";
+        std::cout << " 2. Buat post\n";
+        std::cout << " 3. Lihat post\n";
+        std::cout << " 4. Teman kamu\n";
+        std::cout << " 5. Permintaan Pertemanan\n";
+        std::cout << " 6. Keluar\n";
+        for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+        std::cout << "\n";
+        std::cout << " Pilih : ";
+        std::cin >> pilihanMenu;
+        switch(pilihanMenu){
+            case 1: tambahTeman(user);
+                    break;
+            /*case 2: buatPost();
+                    break;
+            case 3: lihatPost();
+                    break;
+            case 4: lihatTeman();
+                    break;
+            case 5: lihatPermintaan();
+                    break;*/
+            case 6: menuCondition = false;
+                    break;
+        }
     }
 }
 
@@ -104,7 +172,7 @@ void loginInterface(){
             }
         }else{
             if(password == getPassword(username)){
-                userInterface();
+                userInterface(getUser(username));
             }else{
                 std::cout << "Username or Password Invalid !!";
                 sleep(5);
