@@ -24,7 +24,7 @@ void tambahTeman(database::userNode* user){
     if(tolower(yakin) == 'y'){
         addFriend(userToAdd, user->username);
     }
-    for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+    for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
     sleep(2);
 }
 
@@ -40,8 +40,42 @@ void buatPost(database::userNode* user){
     std::cout << " Caption : ";
     std::getline(std::cin, caption);
     addPost(user, judul, caption);
-    for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+    for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
     sleep(2);
+}
+
+void lihatPost(database::userNode* userLogin){
+    std::string username;
+    int jmlhChar = userLogin -> name.length() + 91;
+    for(int i = 1; i <= (jmlhChar-12)/2; i++){std::cout << "=";}
+    std::cout << "|Lihat Post|";
+    for(int i = 1; i <= (jmlhChar-12)/2; i++){std::cout << "=";}
+    std::cout << "\n";
+    std::cout << " Username : ";
+    std::getline(std::cin, username);
+    for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
+    std::cout << "\n";
+    database::userNode* user = getUser(username);
+    if(user != nullptr){
+        if(user->post != nullptr){
+            database::postNode* postList = user->post;
+            bool postContinuity = true;
+            while(postContinuity){
+                std::string command;
+                std::cout << " Nama : " << user->name << "\n";
+                std::cout << " Judul : " << postList->judul << "\n";
+                std::cout << " Caption : " << postList->caption << "\n";
+                for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
+                std::getline(std::cin, command);
+                for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
+                if(command == "next"){
+                    postList = postList->next;
+                }else if(command == "exit"){
+                    postContinuity = false;
+                }
+            }
+        }
+    }
 }
 
 void userInterface(database::userNode* user){
@@ -62,18 +96,18 @@ void userInterface(database::userNode* user){
         std::cout << " 4. Teman kamu\n";
         std::cout << " 5. Permintaan Pertemanan\n";
         std::cout << " 6. Keluar\n";
-        for(int i = 1; i <= (jmlhChar)/2; i++){std::cout << "=";}
+        for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
         std::cout << "\n";
         std::cout << " Pilih : ";
         std::cin >> pilihanMenu;
         switch(pilihanMenu){
             case 1: tambahTeman(user);
                     break;
-            /*case 2: buatPost();
+            case 2: buatPost(user);
                     break;
-            case 3: lihatPost();
+            case 3: lihatPost(user);
                     break;
-            case 4: lihatTeman();
+            /*case 4: lihatTeman();
                     break;
             case 5: lihatPermintaan();
                     break;*/
