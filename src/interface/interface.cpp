@@ -136,7 +136,7 @@ void userInterface(database::userNode* user){
         for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
         std::cout << "\n";
         std::cout << " Pilih : ";
-        std::cin >> pilihanMenu;
+        (std::cin >> pilihanMenu).get();
         switch(pilihanMenu){
             case 1: tambahTeman(user);
                     break;
@@ -144,9 +144,9 @@ void userInterface(database::userNode* user){
                     break;
             case 3: lihatPost(user);
                     break;
-            case 4: lihatTeman();
+            case 4: lihatTeman(user);
                     break;
-            case 5: lihatPermintaan();
+            case 5: lihatPermintaan(user);
                     break;
             case 6: menuCondition = false;
                     break;
@@ -183,7 +183,7 @@ void hapusUser(){
     std::cout << " Username : ";
     std::getline(std::cin, username);
     std::cout << " Yakin? (Y/N) : ";
-    std::cin >> yakin;
+    (std::cin >> yakin).get();
     if(tolower(yakin) == 'y'){
         deleteUser(username);
     }
