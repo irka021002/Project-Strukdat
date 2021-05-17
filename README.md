@@ -3,7 +3,7 @@
 Anggota Kelompok:
 * Irfan Kamal (140810200032)
 * Amariel Danendra Dagna (140810200058)
-* Satriyatama Tristan Triharjono (140810200068)
+* Satriyatama Tristan Suharjono (140810200068)
 ---
 
 ## Latar Belakang
