@@ -78,6 +78,43 @@ void lihatPost(database::userNode* userLogin){
     }
 }
 
+void lihatTeman(database::userNode* user){
+    int jmlhChar = user->name.length() + 91;
+    for (int i = 1; i <= (jmlhChar - 10) / 2; i++) { std::cout << "="; }
+    std::cout << "|Teman Ku|";
+    for (int i = 1; i <= (jmlhChar - 10) / 2; i++) { std::cout << "="; }
+    std::cout << "\n";
+    int i = 1;
+    database::idList* temp = user->friends;
+    while (temp != nullptr) {
+        std::cout << i << ". " << getName(temp->id) << "\n";
+        temp = temp->next;
+    }
+    for (int i = 1; i <= (jmlhChar); i++) { std::cout << "="; }
+    sleep(5);
+}
+
+void lihatPermintaan(database::userNode* user){
+    int jmlhChar = user->name.length() + 91;
+    std::string username;
+    for (int i = 1; i <= (jmlhChar - 18) / 2; i++) { std::cout << "="; }
+    std::cout << "|Permintaan Teman|";
+    for (int i = 1; i <= (jmlhChar - 18) / 2; i++) { std::cout << "="; }
+    std::cout << "\n";
+    int i = 1;
+    database::idList* temp = user->friendsReq;
+    while (temp != nullptr) {
+        std::cout << i << ". " << getName(temp->id) << "\n";
+        temp = temp->next;
+    }
+    for (int i = 1; i <= (jmlhChar); i++) { std::cout << "="; }
+    std::cout << "\n";
+    std::cout << "Tambah : ";
+    std::getline(std::cin,username);
+    for (int i = 1; i <= (jmlhChar); i++) { std::cout << "="; }
+    confirmFriend(user, username);
+}
+
 void userInterface(database::userNode* user){
     bool menuCondition = true;
     std::string name = user->name;
@@ -107,10 +144,10 @@ void userInterface(database::userNode* user){
                     break;
             case 3: lihatPost(user);
                     break;
-            /*case 4: lihatTeman();
+            case 4: lihatTeman();
                     break;
             case 5: lihatPermintaan();
-                    break;*/
+                    break;
             case 6: menuCondition = false;
                     break;
         }

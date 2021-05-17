@@ -29,6 +29,51 @@ bool idExist(std::string id){
     return false;
 }
 
+std::string getName(std::string username) {
+    if (userDatabase == nullptr) {
+        return "Not Exists";
+    }else {
+        database::userNode* temporary = userDatabase;
+        while (temporary != nullptr) {
+            if (temporary->username == username) {
+            return temporary->name;
+            }
+            temporary = temporary->next;
+        }
+        return "Not Exsits";
+    }
+}
+
+void confirmFriend(database::userNode* user, std::string username){
+    database::idList* baru = new database::idList(username);
+    if(user->friends == nullptr){
+        user->friends = baru;
+    } else {
+        database::idList* temp = user->friends;
+        while(temp->next != nullptr){
+            temp = temp->next;
+        }
+        temp->next = baru;
+    }
+    database::idList* temp2 = user->friendsReq;
+    database::idList* temp2p = nullptr;
+    while(temp2 != nullptr){
+        if(temp2->id == username){
+            if(temp2p == nullptr){
+                user->friendsReq = temp2->next;
+                temp2->next = nullptr;
+                delete temp2;
+            } else {
+                temp2p->next = temp2->next;
+                temp2->next = nullptr;
+                delete temp2;
+            }
+        }
+        temp2p = temp2;
+        temp2 = temp2->next;
+    }
+}
+
 database::userNode* getUser(std::string username){
     if(userDatabase == nullptr){
         return nullptr;
