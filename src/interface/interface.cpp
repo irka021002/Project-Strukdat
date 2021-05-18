@@ -60,17 +60,19 @@ void lihatPost(database::userNode* userLogin){
         if(user->post != nullptr){
             database::postNode* postList = user->post;
             bool postContinuity = true;
-            while(postContinuity){
+            while(postContinuity && postList != nullptr){
                 std::string command;
                 std::cout << " Nama : " << user->name << "\n";
                 std::cout << " Judul : " << postList->judul << "\n";
                 std::cout << " Caption : " << postList->caption << "\n";
                 for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
+                std::cout << "\n";
                 std::getline(std::cin, command);
                 for(int i = 1; i <= (jmlhChar); i++){std::cout << "=";}
+                std::cout << "\n";
                 if(command == "next"){
                     postList = postList->next;
-                }else if(command == "exit"){
+                }else{
                     postContinuity = false;
                 }
             }

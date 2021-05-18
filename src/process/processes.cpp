@@ -44,8 +44,24 @@ std::string getName(std::string username) {
     }
 }
 
+database::userNode* getUser(std::string username){
+    if(userDatabase == nullptr){
+        return nullptr;
+    }else{
+        database::userNode* temp = userDatabase;
+        while(temp != nullptr){
+            if(temp->username == username){
+                return temp;
+            }
+            temp = temp->next;
+        }
+        return nullptr;
+    }
+}
+
 void confirmFriend(database::userNode* user, std::string username){
     database::idList* baru = new database::idList(username);
+    database::idList* baru2 = new database::idList(user->username);
     if(user->friends == nullptr){
         user->friends = baru;
     } else {
@@ -54,6 +70,16 @@ void confirmFriend(database::userNode* user, std::string username){
             temp = temp->next;
         }
         temp->next = baru;
+    }
+    user = getUser(username);
+    if(user->friends == nullptr){
+        user->friends = baru2;
+    } else {
+        database::idList* temp = user->friends;
+        while(temp->next != nullptr){
+            temp = temp->next;
+        }
+        temp->next = baru2;
     }
     database::idList* temp2 = user->friendsReq;
     database::idList* temp2p = nullptr;
@@ -71,21 +97,6 @@ void confirmFriend(database::userNode* user, std::string username){
         }
         temp2p = temp2;
         temp2 = temp2->next;
-    }
-}
-
-database::userNode* getUser(std::string username){
-    if(userDatabase == nullptr){
-        return nullptr;
-    }else{
-        database::userNode* temp = userDatabase;
-        while(temp != nullptr){
-            if(temp->username == username){
-                return temp;
-            }
-            temp = temp->next;
-        }
-        return nullptr;
     }
 }
 
